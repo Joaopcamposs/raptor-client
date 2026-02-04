@@ -187,9 +187,10 @@ class RaptorToolWindowPanel(
                 add(
                     object : AnAction("Import cURL", "Import request from cURL command", AllIcons.ToolbarDecorator.Import) {
                         override fun actionPerformed(e: AnActionEvent) {
-                            com.raptorclient.actions
-                                .ImportCurlAction()
-                                .actionPerformed(e)
+                            e.project?.let {
+                                com.raptorclient.actions.ImportCurlAction
+                                    .importCurl(it)
+                            }
                         }
                     },
                 )

@@ -16,25 +16,30 @@ import javax.swing.*
 class ImportCurlAction : AnAction() {
     override fun actionPerformed(e: AnActionEvent) {
         val project = e.project ?: return
+        importCurl(project)
+    }
 
-        val dialog = ImportCurlDialog()
-        if (dialog.showAndGet()) {
-            val curlCommand = dialog.getCurlCommand()
-            if (curlCommand.isNotBlank()) {
-                try {
-                    val parser = CurlParser()
-                    val request = parser.parse(curlCommand)
+    companion object {
+        fun importCurl(project: com.intellij.openapi.project.Project) {
+            val dialog = ImportCurlDialog()
+            if (dialog.showAndGet()) {
+                val curlCommand = dialog.getCurlCommand()
+                if (curlCommand.isNotBlank()) {
+                    try {
+                        val parser = CurlParser()
+                        val request = parser.parse(curlCommand)
 
-                    val storageService = RequestStorageService.getInstance(project)
-                    storageService.addDraft(request)
-                    RaptorEditorManager.openRequest(project, request)
-                } catch (ex: Exception) {
-                    JOptionPane.showMessageDialog(
-                        null,
-                        "Failed to parse cURL command: ${ex.message}",
-                        "Import Error",
-                        JOptionPane.ERROR_MESSAGE,
-                    )
+                        val storageService = RequestStorageService.getInstance(project)
+                        storageService.addDraft(request)
+                        RaptorEditorManager.openRequest(project, request)
+                    } catch (ex: Exception) {
+                        JOptionPane.showMessageDialog(
+                            null,
+                            "Failed to parse cURL command: ${ex.message}",
+                            "Import Error",
+                            JOptionPane.ERROR_MESSAGE,
+                        )
+                    }
                 }
             }
         }

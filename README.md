@@ -285,12 +285,7 @@ data class AuthConfig(
 
 Este projeto está licenciado sob a MIT License - veja o arquivo [LICENSE](LICENSE) para detalhes.
 
-## 🙏 Agradecimentos
-
-- Inspirado no [JetClient](https://plugins.jetbrains.com/plugin/17446-jetclient)
 - Construído com [IntelliJ Platform SDK](https://plugins.jetbrains.com/docs/intellij/welcome.html)
-- Cliente HTTP powered by [OkHttp](https://square.github.io/okhttp/)
 
 ---
 
-**RaptorClient** - Desenvolvido com ❤️ para a comunidade JetBrains

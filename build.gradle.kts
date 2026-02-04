@@ -48,6 +48,12 @@ intellijPlatform {
         }
     }
 
+    pluginVerification {
+        ides {
+            ide(org.jetbrains.intellij.platform.gradle.IntelliJPlatformType.IntellijIdeaCommunity, "2024.3")
+        }
+    }
+
     signing {
         certificateChain = providers.environmentVariable("CERTIFICATE_CHAIN")
         privateKey = providers.environmentVariable("PRIVATE_KEY")
