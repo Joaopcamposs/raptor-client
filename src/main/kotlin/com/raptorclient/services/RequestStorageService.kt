@@ -18,7 +18,7 @@ import com.raptorclient.models.RequestItem
     storages = [Storage("raptorClient.xml")],
 )
 class RequestStorageService(
-    private val project: Project,
+    @Suppress("unused") private val project: Project,
 ) : PersistentStateComponent<RequestStorageService.State> {
     private val objectMapper: ObjectMapper by lazy {
         ObjectMapper().registerModule(KotlinModule.Builder().build())
@@ -41,7 +41,7 @@ class RequestStorageService(
         myState = state
         try {
             collection = objectMapper.readValue(state.collectionJson)
-        } catch (e: Exception) {
+        } catch (_: Exception) {
             collection = Collection()
         }
     }

@@ -158,16 +158,17 @@ class CurlParser {
                             request.auth.basicPassword = decoded.substring(colonIndex + 1)
                             request.headers.remove(authHeader)
                         }
-                    } catch (e: Exception) {
+                    } catch (_: Exception) {
+                        // Invalid Base64 encoding, ignore
                     }
                 }
             }
         }
 
         try {
-            val url = java.net.URL(request.url)
-            request.name = "${request.method.name} ${url.path.ifEmpty { "/" }}"
-        } catch (e: Exception) {
+            val uri = java.net.URI(request.url)
+            request.name = "${request.method.name} ${uri.path.ifEmpty { "/" }}"
+        } catch (_: Exception) {
             request.name = "${request.method.name} Request"
         }
 

@@ -207,12 +207,12 @@ class RequestEditorPanel(
                     sendButton.isEnabled = true
                     sendButton.text = "Send"
                 }
-            } catch (e: Exception) {
+            } catch (ex: Exception) {
                 SwingUtilities.invokeLater {
                     statusLabel.text = "Status: Error"
                     statusLabel.foreground = JBColor.RED
-                    jsonResponseArea.text = "Error: ${e.message}"
-                    rawResponseArea.text = "Error: ${e.message}"
+                    jsonResponseArea.text = "Error: ${ex.message}"
+                    rawResponseArea.text = "Error: ${ex.message}"
                     sendButton.isEnabled = true
                     sendButton.text = "Send"
                 }
@@ -265,7 +265,7 @@ class RequestEditorPanel(
                 com.google.gson.JsonParser
                     .parseString(json)
             gson.toJson(element)
-        } catch (e: Exception) {
+        } catch (_: Exception) {
             json
         }
 

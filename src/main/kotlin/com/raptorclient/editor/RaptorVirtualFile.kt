@@ -39,9 +39,9 @@ class RaptorVirtualFile(
     override fun getChildren(): Array<VirtualFile>? = null
 
     override fun getOutputStream(
-        requestor: Any?,
-        newModificationStamp: Long,
-        newTimeStamp: Long,
+        @Suppress("unused") requestor: Any?,
+        @Suppress("unused") newModificationStamp: Long,
+        @Suppress("unused") newTimeStamp: Long,
     ): OutputStream =
         object : OutputStream() {
             override fun write(b: Int) {}
@@ -56,9 +56,9 @@ class RaptorVirtualFile(
     override fun getLength(): Long = 0
 
     override fun refresh(
-        asynchronous: Boolean,
-        recursive: Boolean,
-        postRunnable: Runnable?,
+        @Suppress("unused") asynchronous: Boolean,
+        @Suppress("unused") recursive: Boolean,
+        @Suppress("unused") postRunnable: Runnable?,
     ) {}
 
     override fun getInputStream(): InputStream = "".byteInputStream()
@@ -97,31 +97,41 @@ class RaptorFileSystem : VirtualFileSystem() {
 
     override fun getProtocol(): String = "raptor"
 
-    override fun findFileByPath(path: String): VirtualFile? = null
+    override fun findFileByPath(
+        @Suppress("unused") path: String,
+    ): VirtualFile? = null
 
-    override fun refresh(asynchronous: Boolean) {}
+    override fun refresh(
+        @Suppress("unused") asynchronous: Boolean,
+    ) {}
 
-    override fun refreshAndFindFileByPath(path: String): VirtualFile? = null
+    override fun refreshAndFindFileByPath(
+        @Suppress("unused") path: String,
+    ): VirtualFile? = null
 
-    override fun addVirtualFileListener(listener: com.intellij.openapi.vfs.VirtualFileListener) {}
+    override fun addVirtualFileListener(
+        @Suppress("unused") listener: com.intellij.openapi.vfs.VirtualFileListener,
+    ) {}
 
-    override fun removeVirtualFileListener(listener: com.intellij.openapi.vfs.VirtualFileListener) {}
+    override fun removeVirtualFileListener(
+        @Suppress("unused") listener: com.intellij.openapi.vfs.VirtualFileListener,
+    ) {}
 
     override fun deleteFile(
-        requestor: Any?,
-        vFile: VirtualFile,
+        @Suppress("unused") requestor: Any?,
+        @Suppress("unused") vFile: VirtualFile,
     ) {}
 
     override fun moveFile(
-        requestor: Any?,
-        vFile: VirtualFile,
-        newParent: VirtualFile,
+        @Suppress("unused") requestor: Any?,
+        @Suppress("unused") vFile: VirtualFile,
+        @Suppress("unused") newParent: VirtualFile,
     ) {}
 
     override fun renameFile(
-        requestor: Any?,
-        vFile: VirtualFile,
-        newName: String,
+        @Suppress("unused") requestor: Any?,
+        @Suppress("unused") vFile: VirtualFile,
+        @Suppress("unused") newName: String,
     ) {}
 
     override fun createChildFile(

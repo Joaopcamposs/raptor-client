@@ -10,7 +10,7 @@ import javax.swing.*
 import javax.swing.table.AbstractTableModel
 
 class KeyValuePanel(
-    private val title: String,
+    @Suppress("unused") private val title: String,
 ) : JPanel(BorderLayout()) {
     private val tableModel = KeyValueTableModel()
     private val table = JBTable(tableModel)
@@ -160,9 +160,9 @@ class KeyValuePanel(
             table: JTable?,
             value: Any?,
             isSelected: Boolean,
-            hasFocus: Boolean,
-            row: Int,
-            column: Int,
+            @Suppress("unused") hasFocus: Boolean,
+            @Suppress("unused") row: Int,
+            @Suppress("unused") column: Int,
         ): Component {
             this.isSelected = value as? Boolean ?: false
             background = if (isSelected) table?.selectionBackground else table?.background
@@ -181,11 +181,11 @@ class KeyValuePanel(
 
         override fun getTableCellRendererComponent(
             table: JTable?,
-            value: Any?,
+            @Suppress("unused") value: Any?,
             isSelected: Boolean,
-            hasFocus: Boolean,
-            row: Int,
-            column: Int,
+            @Suppress("unused") hasFocus: Boolean,
+            @Suppress("unused") row: Int,
+            @Suppress("unused") column: Int,
         ): Component {
             background = if (isSelected) table?.selectionBackground else table?.background
             return this
@@ -205,11 +205,11 @@ class KeyValuePanel(
         }
 
         override fun getTableCellEditorComponent(
-            table: JTable?,
-            value: Any?,
-            isSelected: Boolean,
+            @Suppress("unused") table: JTable?,
+            @Suppress("unused") value: Any?,
+            @Suppress("unused") isSelected: Boolean,
             row: Int,
-            column: Int,
+            @Suppress("unused") column: Int,
         ): Component {
             currentRow = row
             return button

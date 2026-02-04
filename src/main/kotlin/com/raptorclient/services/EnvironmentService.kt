@@ -14,8 +14,9 @@ import com.intellij.openapi.project.Project
     name = "RaptorClientEnvironments",
     storages = [Storage("raptorClientEnv.xml")],
 )
+@Suppress("unused")
 class EnvironmentService(
-    private val project: Project,
+    @Suppress("unused") private val project: Project,
 ) : PersistentStateComponent<EnvironmentService.State> {
     private val objectMapper = ObjectMapper().registerModule(KotlinModule.Builder().build())
     private var environments = mutableMapOf<String, MutableMap<String, String>>()
@@ -40,7 +41,7 @@ class EnvironmentService(
         try {
             environments = objectMapper.readValue(state.environmentsJson)
             activeEnvironment = state.activeEnvironmentName
-        } catch (e: Exception) {
+        } catch (_: Exception) {
             environments = mutableMapOf()
             activeEnvironment = null
         }

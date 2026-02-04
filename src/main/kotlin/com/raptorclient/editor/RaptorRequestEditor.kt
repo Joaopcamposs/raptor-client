@@ -40,15 +40,21 @@ class RaptorRequestEditor(
 
     override fun getName(): String = "RaptorClient"
 
-    override fun setState(state: FileEditorState) {}
+    override fun setState(
+        @Suppress("unused") state: FileEditorState,
+    ) {}
 
     override fun isModified(): Boolean = editorPanel?.isModified() ?: false
 
     override fun isValid(): Boolean = true
 
-    override fun addPropertyChangeListener(listener: PropertyChangeListener) {}
+    override fun addPropertyChangeListener(
+        @Suppress("unused") listener: PropertyChangeListener,
+    ) {}
 
-    override fun removePropertyChangeListener(listener: PropertyChangeListener) {}
+    override fun removePropertyChangeListener(
+        @Suppress("unused") listener: PropertyChangeListener,
+    ) {}
 
     override fun getCurrentLocation(): FileEditorLocation? = null
 

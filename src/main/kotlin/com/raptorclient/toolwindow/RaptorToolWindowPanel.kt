@@ -58,7 +58,7 @@ class RaptorToolWindowPanel(
                         },
                     )
                     safeRefreshTree()
-                } catch (e: Exception) {
+                } catch (_: Exception) {
                     // Ignore
                 }
             }
@@ -211,7 +211,7 @@ class RaptorToolWindowPanel(
     private fun safeRefreshTree() {
         try {
             refreshTree()
-        } catch (e: Exception) {
+        } catch (_: Exception) {
             // Ignore errors during refresh
         }
     }
@@ -279,7 +279,7 @@ class RaptorToolWindowPanel(
                     val methodColor =
                         try {
                             Color.decode(userObject.method.color)
-                        } catch (e: Exception) {
+                        } catch (_: Exception) {
                             Color.GRAY
                         }
                     text =

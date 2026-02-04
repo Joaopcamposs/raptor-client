@@ -48,13 +48,13 @@ class HttpClientService {
                     responseSize = body.length.toLong(),
                 )
             }
-        } catch (e: IOException) {
+        } catch (ex: IOException) {
             val endTime = System.currentTimeMillis()
             return HttpResponse(
                 statusCode = 0,
                 statusText = "Error",
                 headers = emptyMap(),
-                body = "Error: ${e.message}",
+                body = "Error: ${ex.message}",
                 contentType = "text/plain",
                 responseTime = endTime - startTime,
                 responseSize = 0,
