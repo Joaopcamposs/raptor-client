@@ -1,0 +1,112 @@
+# Gradle
+.gradle/
+build/
+!gradle/wrapper/gradle-wrapper.jar
+!**/src/main/**/build/
+!**/src/test/**/build/
+
+# Kotlin
+.kotlin/
+kotlin-js-store/
+
+# IntelliJ IDEA
+.idea/
+*.iws
+*.iml
+*.ipr
+out/
+!**/src/main/**/out/
+!**/src/test/**/out/
+
+# IntelliJ Platform Plugin
+.intellijPlatform/
+sandbox/
+
+# Eclipse
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+.sts4-cache
+bin/
+!**/src/main/**/bin/
+!**/src/test/**/bin/
+
+# NetBeans
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+
+# VS Code
+.vscode/
+
+# Mac OS
+.DS_Store
+*.swp
+*~
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# Linux
+*~
+.fuse_hidden*
+.nfs*
+
+# Logs
+*.log
+logs/
+
+# Runtime
+*.pid
+*.seed
+
+# Compiled
+*.class
+*.jar
+!gradle/wrapper/gradle-wrapper.jar
+
+# Package files
+*.war
+*.nar
+*.ear
+*.tar.gz
+*.rar
+
+# Virtual environments
+.env
+.env.local
+*.env
+
+# Temporary files
+tmp/
+temp/
+*.tmp
+*.bak
+
+# Coverage
+coverage/
+*.lcov
+
+# Test results
+test-results/
+test-output/
+
+# Ktlint
+.ktlint/
+
+# Local config
+local.properties
+
+# JetBrains plugin sandbox
+idea-sandbox/
+
+# Reports
+reports/
+build/reports/

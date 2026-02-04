@@ -78,7 +78,7 @@ cd raptor-client
 export JAVA_HOME=/path/to/jdk-21-or-higher
 ./gradlew buildPlugin
 
-# O plugin estará em build/distributions/raptor-client-v2-1.0.0.zip
+# O plugin estará em build/distributions/raptor-client-1.0.0.zip
 ```
 
 ## 🎯 Como Usar
@@ -164,7 +164,7 @@ Crie ambientes (Development, Staging, Production) com variáveis específicas:
 ## 📁 Estrutura do Projeto
 
 ```
-raptor-client-v2/
+raptor-client/
 ├── build.gradle.kts              # Configuração do build
 ├── settings.gradle.kts           # Nome do projeto
 ├── gradle.properties             # Propriedades do Gradle
@@ -189,24 +189,27 @@ raptor-client-v2/
 
 ## 🔧 Desenvolvimento
 
-### Build
+Use os comandos `make` para facilitar o desenvolvimento:
+
 ```bash
-./gradlew build
+make help       # Mostra todos os comandos disponíveis
+make build      # Compila o plugin
+make run        # Inicia IDE de teste com o plugin
+make test       # Executa os testes
+make lint       # Verifica estilo do código (ktlint)
+make lint-fix   # Corrige estilo automaticamente
+make package    # Cria o arquivo ZIP do plugin
+make install    # Build completo + Package
+make verify     # Verifica compatibilidade do plugin
+make clean      # Limpa arquivos de build
 ```
 
-### Executar IDE de teste
+### Ou usando Gradle diretamente:
 ```bash
-./gradlew runIde
-```
-
-### Criar plugin distribuível
-```bash
-./gradlew buildPlugin
-```
-
-### Verificar compatibilidade
-```bash
-./gradlew verifyPlugin
+./gradlew build          # Compila
+./gradlew runIde         # IDE de teste
+./gradlew buildPlugin    # Cria ZIP
+./gradlew ktlintFormat   # Formata código
 ```
 
 ## 📝 API de Modelos
@@ -245,13 +248,38 @@ data class AuthConfig(
 )
 ```
 
+## 📝 Próximos Passos para Publicação
+
+1. **Criar conta no JetBrains Marketplace**
+   - Acesse: https://plugins.jetbrains.com/
+   - Crie uma conta ou faça login
+
+2. **Gerar token de publicação**
+   - Vá em: Hub → Settings → Personal Access Tokens
+   - Crie um token com escopo `Plugin Repository`
+
+3. **Verificar o plugin**
+   ```bash
+   make verify
+   ```
+
+4. **Publicar**
+   ```bash
+   export PUBLISH_TOKEN=seu_token_aqui
+   make publish
+   ```
+
+5. **Aguardar aprovação**
+   - O JetBrains revisará o plugin (1-2 dias úteis)
+
 ## 🤝 Contribuindo
 
 1. Fork o repositório
 2. Crie uma branch para sua feature (`git checkout -b feature/nova-feature`)
-3. Commit suas mudanças (`git commit -am 'Adiciona nova feature'`)
-4. Push para a branch (`git push origin feature/nova-feature`)
-5. Abra um Pull Request
+3. Execute o linter: `make lint-fix`
+4. Commit suas mudanças (`git commit -am 'Adiciona nova feature'`)
+5. Push para a branch (`git push origin feature/nova-feature`)
+6. Abra um Pull Request
 
 ## 📄 Licença
 

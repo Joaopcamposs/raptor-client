@@ -1,0 +1,76 @@
+<idea-plugin>
+    <id>com.raptorclient.plugin</id>
+    <name>RaptorClient</name>
+    <version>1.0.0</version>
+    <vendor email="support@raptorclient.com" url="https://raptorclient.com">RaptorClient</vendor>
+
+    <description><![CDATA[
+        <h2>RaptorClient - HTTP REST Client for JetBrains IDEs</h2>
+        <p>A powerful and intuitive HTTP REST client integrated directly into your IDE.</p>
+        <h3>Features:</h3>
+        <ul>
+            <li>Send HTTP requests (GET, POST, PUT, DELETE, PATCH, HEAD, OPTIONS)</li>
+            <li>Organize requests in collections and folders</li>
+            <li>Import cURL commands</li>
+            <li>View responses in JSON, Raw, and Headers tabs</li>
+            <li>Request history</li>
+            <li>Environment variables support</li>
+            <li>Request/Response body formatting</li>
+        </ul>
+    ]]></description>
+
+    <change-notes><![CDATA[
+        <h3>1.0.0</h3>
+        <ul>
+            <li>Initial release</li>
+            <li>HTTP client with full REST support</li>
+            <li>cURL import functionality</li>
+            <li>Collections management</li>
+        </ul>
+    ]]></change-notes>
+
+    <depends>com.intellij.modules.platform</depends>
+
+    <extensions defaultExtensionNs="com.intellij">
+        <toolWindow id="RaptorClient" 
+                    secondary="true" 
+                    icon="/icons/raptor-branco.svg"
+                    anchor="right"
+                    factoryClass="com.raptorclient.toolwindow.RaptorToolWindowFactory"/>
+        
+        <fileEditorProvider implementation="com.raptorclient.editor.RaptorRequestEditorProvider"/>
+        
+        <projectService serviceImplementation="com.raptorclient.services.RequestStorageService"/>
+        <projectService serviceImplementation="com.raptorclient.services.EnvironmentService"/>
+        
+        <notificationGroup id="RaptorClient.Notifications" 
+                          displayType="BALLOON" 
+                          key="notification.group.raptorclient"/>
+    </extensions>
+
+    <actions>
+        <group id="RaptorClient.ToolbarActions" text="RaptorClient Actions" description="RaptorClient toolbar actions">
+            <action id="RaptorClient.NewRequest" 
+                    class="com.raptorclient.actions.NewRequestAction" 
+                    text="New Request" 
+                    description="Create a new HTTP request"
+                    icon="AllIcons.General.Add"/>
+            <action id="RaptorClient.NewFolder" 
+                    class="com.raptorclient.actions.NewFolderAction" 
+                    text="New Folder" 
+                    description="Create a new folder"
+                    icon="AllIcons.Nodes.Folder"/>
+            <action id="RaptorClient.ImportCurl" 
+                    class="com.raptorclient.actions.ImportCurlAction" 
+                    text="Import cURL" 
+                    description="Import request from cURL command"
+                    icon="AllIcons.ToolbarDecorator.Import"/>
+            <separator/>
+            <action id="RaptorClient.RefreshCollections" 
+                    class="com.raptorclient.actions.RefreshCollectionsAction" 
+                    text="Refresh" 
+                    description="Refresh collections"
+                    icon="AllIcons.Actions.Refresh"/>
+        </group>
+    </actions>
+</idea-plugin>
