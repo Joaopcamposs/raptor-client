@@ -6,6 +6,8 @@
 
 **RaptorClient** é um cliente HTTP REST completo integrado diretamente às IDEs JetBrains (IntelliJ IDEA, PyCharm, WebStorm, etc.). Similar ao JetClient e Postman, permite criar, organizar e executar requisições HTTP sem sair do seu ambiente de desenvolvimento.
 
+[![Install Plugin](https://img.shields.io/badge/Install%20Plugin-JetBrains%20Marketplace-blue)](https://plugins.jetbrains.com/plugin/30072-raptor-client)
+
 ## 🚀 Funcionalidades
 
 ### Métodos HTTP Suportados
@@ -72,7 +74,7 @@ cd raptor-client
 export JAVA_HOME=/path/to/jdk-21-or-higher
 make install
 ```
-1. O plugin estará em build/distributions/raptor-client-1.0.0.zip
+1. O plugin estará em build/distributions/raptor-client-1.0.1.zip
 2. Na IDE, vá em **Settings** → **Plugins** → **⚙️** → **Install Plugin from Disk...**
 3. Selecione o arquivo ZIP
 4. Reinicie a IDE

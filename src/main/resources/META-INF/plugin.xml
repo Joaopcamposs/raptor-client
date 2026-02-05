@@ -1,7 +1,7 @@
 <idea-plugin>
     <id>com.raptorclient.plugin</id>
     <name>RaptorClient</name>
-    <version>1.0.0</version>
+    <version>1.0.1</version>
     <vendor email="joaopcamposs@outlook.com" url="https://github.com/Joaopcamposs/raptor-client">RaptorClient</vendor>
 
     <description><![CDATA[
@@ -26,6 +26,11 @@
             <li>HTTP client with full REST support</li>
             <li>cURL import functionality</li>
             <li>Collections management</li>
+        </ul>
+        <h3>1.0.1</h3>
+        <ul>
+            <li>Fix icons release</li>
+            <li>Add drafts rename function</li>
         </ul>
     ]]></change-notes>
 
