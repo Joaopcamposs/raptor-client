@@ -2,7 +2,7 @@
     <id>com.raptorclient.plugin</id>
     <name>RaptorClient</name>
     <version>1.0.0</version>
-    <vendor email="support@raptorclient.com" url="https://raptorclient.com">RaptorClient</vendor>
+    <vendor email="joaopcamposs@outlook.com" url="https://github.com/Joaopcamposs/raptor-client">RaptorClient</vendor>
 
     <description><![CDATA[
         <h2>RaptorClient - HTTP REST Client for JetBrains IDEs</h2>
@@ -32,43 +32,43 @@
     <depends>com.intellij.modules.platform</depends>
 
     <extensions defaultExtensionNs="com.intellij">
-        <toolWindow id="RaptorClient" 
-                    secondary="true" 
-                    icon="/icons/raptor-branco.svg"
+        <toolWindow id="RaptorClient"
+                    secondary="true"
+                    icon="/icons/raptor.svg"
                     anchor="right"
                     factoryClass="com.raptorclient.toolwindow.RaptorToolWindowFactory"/>
-        
+
         <fileEditorProvider implementation="com.raptorclient.editor.RaptorRequestEditorProvider"/>
-        
+
         <projectService serviceImplementation="com.raptorclient.services.RequestStorageService"/>
         <projectService serviceImplementation="com.raptorclient.services.EnvironmentService"/>
-        
-        <notificationGroup id="RaptorClient.Notifications" 
-                          displayType="BALLOON" 
+
+        <notificationGroup id="RaptorClient.Notifications"
+                          displayType="BALLOON"
                           key="notification.group.raptorclient"/>
     </extensions>
 
     <actions>
         <group id="RaptorClient.ToolbarActions" text="RaptorClient Actions" description="RaptorClient toolbar actions">
-            <action id="RaptorClient.NewRequest" 
-                    class="com.raptorclient.actions.NewRequestAction" 
-                    text="New Request" 
+            <action id="RaptorClient.NewRequest"
+                    class="com.raptorclient.actions.NewRequestAction"
+                    text="New Request"
                     description="Create a new HTTP request"
                     icon="AllIcons.General.Add"/>
-            <action id="RaptorClient.NewFolder" 
-                    class="com.raptorclient.actions.NewFolderAction" 
-                    text="New Folder" 
+            <action id="RaptorClient.NewFolder"
+                    class="com.raptorclient.actions.NewFolderAction"
+                    text="New Folder"
                     description="Create a new folder"
                     icon="AllIcons.Nodes.Folder"/>
-            <action id="RaptorClient.ImportCurl" 
-                    class="com.raptorclient.actions.ImportCurlAction" 
-                    text="Import cURL" 
+            <action id="RaptorClient.ImportCurl"
+                    class="com.raptorclient.actions.ImportCurlAction"
+                    text="Import cURL"
                     description="Import request from cURL command"
                     icon="AllIcons.ToolbarDecorator.Import"/>
             <separator/>
-            <action id="RaptorClient.RefreshCollections" 
-                    class="com.raptorclient.actions.RefreshCollectionsAction" 
-                    text="Refresh" 
+            <action id="RaptorClient.RefreshCollections"
+                    class="com.raptorclient.actions.RefreshCollectionsAction"
+                    text="Refresh"
                     description="Refresh collections"
                     icon="AllIcons.Actions.Refresh"/>
         </group>

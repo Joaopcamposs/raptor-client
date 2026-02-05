@@ -1,7 +1,7 @@
 # RaptorClient
 
-<p align="center">
-  <img src="src/main/resources/icons/raptor-branco.svg" alt="RaptorClient Logo" width="128" height="128">
+<p>
+  <img src="src/main/resources/icons/raptor_dark.svg" alt="RaptorClient Logo" width="128" height="128">
 </p>
 
 **RaptorClient** é um cliente HTTP REST completo integrado diretamente às IDEs JetBrains (IntelliJ IDEA, PyCharm, WebStorm, etc.). Similar ao JetClient e Postman, permite criar, organizar e executar requisições HTTP sem sair do seu ambiente de desenvolvimento.
@@ -60,15 +60,9 @@ Use variáveis em URLs, headers e body:
 Authorization: Bearer {{access_token}}
 ```
 
-## 📦 Instalação
+## 📦 Instalação Manual
 
-### Método 1: Instalar do arquivo ZIP
-1. Baixe o arquivo `raptor-client-1.0.0.zip` da pasta `build/distributions/`
-2. Na IDE, vá em **Settings** → **Plugins** → **⚙️** → **Install Plugin from Disk...**
-3. Selecione o arquivo ZIP
-4. Reinicie a IDE
-
-### Método 2: Build do código fonte
+### Build do código fonte
 ```bash
 # Clone o repositório
 git clone https://github.com/seu-usuario/raptor-client.git
@@ -76,10 +70,12 @@ cd raptor-client
 
 # Build do plugin
 export JAVA_HOME=/path/to/jdk-21-or-higher
-./gradlew buildPlugin
-
-# O plugin estará em build/distributions/raptor-client-1.0.0.zip
+make install
 ```
+1. O plugin estará em build/distributions/raptor-client-1.0.0.zip
+2. Na IDE, vá em **Settings** → **Plugins** → **⚙️** → **Install Plugin from Disk...**
+3. Selecione o arquivo ZIP
+4. Reinicie a IDE
 
 ## 🎯 Como Usar
 
@@ -248,30 +244,6 @@ data class AuthConfig(
 )
 ```
 
-## 📝 Próximos Passos para Publicação
-
-1. **Criar conta no JetBrains Marketplace**
-   - Acesse: https://plugins.jetbrains.com/
-   - Crie uma conta ou faça login
-
-2. **Gerar token de publicação**
-   - Vá em: Hub → Settings → Personal Access Tokens
-   - Crie um token com escopo `Plugin Repository`
-
-3. **Verificar o plugin**
-   ```bash
-   make verify
-   ```
-
-4. **Publicar**
-   ```bash
-   export PUBLISH_TOKEN=seu_token_aqui
-   make publish
-   ```
-
-5. **Aguardar aprovação**
-   - O JetBrains revisará o plugin (1-2 dias úteis)
-
 ## 🤝 Contribuindo
 
 1. Fork o repositório
@@ -286,6 +258,3 @@ data class AuthConfig(
 Este projeto está licenciado sob a MIT License - veja o arquivo [LICENSE](LICENSE) para detalhes.
 
 - Construído com [IntelliJ Platform SDK](https://plugins.jetbrains.com/docs/intellij/welcome.html)
-
----
-
