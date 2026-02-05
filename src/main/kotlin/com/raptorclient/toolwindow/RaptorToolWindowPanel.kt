@@ -107,6 +107,26 @@ class RaptorToolWindowPanel(
                     },
                 )
                 popup.add(
+                    JMenuItem("Rename").apply {
+                        addActionListener {
+                            val newName =
+                                javax.swing.JOptionPane.showInputDialog(
+                                    tree,
+                                    "Enter new name:",
+                                    "Rename Request",
+                                    javax.swing.JOptionPane.PLAIN_MESSAGE,
+                                    null,
+                                    null,
+                                    userObject.name,
+                                ) as? String
+                            if (!newName.isNullOrBlank()) {
+                                userObject.name = newName
+                                storageService.updateRequest(userObject)
+                            }
+                        }
+                    },
+                )
+                popup.add(
                     JMenuItem("Duplicate").apply {
                         addActionListener {
                             val duplicated = userObject.duplicate()
