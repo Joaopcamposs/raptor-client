@@ -45,7 +45,7 @@ Veja [ARCHITECTURE.md](ARCHITECTURE.md) para uma explicação detalhada de cada 
 
 ### Fazendo Alterações
 
-1. Crie uma branch de feature a partir da `main`:
+1. Crie uma branch de feature a partir da `master`:
    ```bash
    git checkout -b feature/nome-da-sua-feature
    ```
@@ -82,7 +82,7 @@ Seguimos [Conventional Commits](https://www.conventionalcommits.org/):
 ### Enviando um Pull Request
 
 1. Faça push da sua branch para o seu fork.
-2. Abra um Pull Request contra a branch `main`.
+2. Abra um Pull Request contra a branch `master`.
 3. Preencha a descrição do PR explicando **o que** e **por que**.
 4. Certifique-se de que as verificações de CI passam (lint, build, testes).
 5. Um mantenedor revisará seu PR.
