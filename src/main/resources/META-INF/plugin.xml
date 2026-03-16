@@ -2,7 +2,7 @@
     <id>com.raptorclient.plugin</id>
     <name>RaptorClient</name>
     <version>1.0.2</version>
-    <vendor email="joaopcamposs@outlook.com" url="https://github.com/Joaopcamposs/raptor-client">RaptorClient</vendor>
+    <vendor email="joaopcamposs@outlook.com" url="https://github.com/Joaopcamposs/raptor-client">Joaopcamposs</vendor>
 
     <description><![CDATA[
         <h2>RaptorClient - HTTP REST Client for JetBrains IDEs</h2>
