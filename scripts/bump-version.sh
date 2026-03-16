@@ -8,7 +8,7 @@ VERSION_TYPE=${1:-patch}
 PLUGIN_XML="src/main/resources/META-INF/plugin.xml"
 
 # Obter versão atual
-CURRENT_VERSION=$(grep -oP '(?<=<version>)[^<]+' "$PLUGIN_XML")
+CURRENT_VERSION=$(sed -n 's/.*<version>\([^<]*\)<\/version>.*/\1/p' "$PLUGIN_XML" | head -n 1)
 echo "📌 Versão atual: $CURRENT_VERSION"
 
 # Separar versão em partes
