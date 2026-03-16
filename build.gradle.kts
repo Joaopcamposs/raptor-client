@@ -6,7 +6,7 @@ plugins {
 }
 
 group = "com.raptorclient"
-version = "1.0.1"
+version = "1.0.2"
 
 repositories {
     mavenCentral()
@@ -27,7 +27,7 @@ dependencies {
         intellijIdeaCommunity("2024.3")
         pluginVerifier()
         zipSigner()
-        testFramework(org.jetbrains.intellij.platform.gradle.TestFrameworkType.Platform)
+        testFramework(org.jetbrains.intellij.platform.gradle.TestFrameworkType.Starter)
     }
 
     implementation("com.squareup.okhttp3:okhttp:4.12.0")
@@ -37,6 +37,7 @@ dependencies {
 
     testImplementation(platform("org.junit:junit-bom:5.10.0"))
     testImplementation("org.junit.jupiter:junit-jupiter")
+    testImplementation("junit:junit:4.13.2")
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")
 }
 

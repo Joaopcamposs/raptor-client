@@ -1,5 +1,7 @@
 package com.raptorclient.models
 
+import java.util.Locale
+
 data class HttpResponse(
     val statusCode: Int,
     val statusText: String,
@@ -15,15 +17,15 @@ data class HttpResponse(
     val formattedSize: String get() {
         return when {
             responseSize < 1024 -> "$responseSize bytes"
-            responseSize < 1024 * 1024 -> String.format("%.2f KB", responseSize / 1024.0)
-            else -> String.format("%.2f MB", responseSize / (1024.0 * 1024.0))
+            responseSize < 1024 * 1024 -> String.format(Locale.US, "%.2f KB", responseSize / 1024.0)
+            else -> String.format(Locale.US, "%.2f MB", responseSize / (1024.0 * 1024.0))
         }
     }
 
     val formattedTime: String get() {
         return when {
             responseTime < 1000 -> "$responseTime ms"
-            else -> String.format("%.2f s", responseTime / 1000.0)
+            else -> String.format(Locale.US, "%.2f s", responseTime / 1000.0)
         }
     }
 }

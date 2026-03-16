@@ -1,7 +1,7 @@
 <idea-plugin>
     <id>com.raptorclient.plugin</id>
     <name>RaptorClient</name>
-    <version>1.0.1</version>
+    <version>1.0.2</version>
     <vendor email="joaopcamposs@outlook.com" url="https://github.com/Joaopcamposs/raptor-client">RaptorClient</vendor>
 
     <description><![CDATA[
