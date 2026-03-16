@@ -90,9 +90,7 @@ class RequestItemTest {
         @Test
         fun `should set new timestamps on duplicate`() {
             val original = RequestItem()
-            // Pequeno delay para garantir timestamps diferentes
-            Thread.sleep(10)
-
+            // Verifica que o timestamp do novo pedido não é anterior ao original
             val copy = original.duplicate()
 
             assertTrue(copy.createdAt >= original.createdAt)
