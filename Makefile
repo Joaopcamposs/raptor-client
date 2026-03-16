@@ -5,7 +5,7 @@
 GRADLE = ./gradlew
 # Gradle toolchain baixará JDK 21 automaticamente se necessário
 
-.PHONY: help build clean test run verify package install publish lint lint-fix
+.PHONY: help build clean test run verify package install publish lint lint-fix version-patch version-minor version-major version-auto
 
 # Help - comando padrão
 help:
@@ -25,6 +25,12 @@ help:
 	@echo "║  make lint       - Verifica estilo do código (ktlint)        ║"
 	@echo "║  make lint-fix   - Corrige estilo automaticamente            ║"
 	@echo "║  make info       - Mostra informações do ambiente            ║"
+	@echo "║                                                              ║"
+	@echo "║  Versionamento:                                              ║"
+	@echo "║  make version-patch  - Incrementa versão PATCH (1.0.X)       ║"
+	@echo "║  make version-minor  - Incrementa versão MINOR (1.X.0)       ║"
+	@echo "║  make version-major  - Incrementa versão MAJOR (X.0.0)       ║"
+	@echo "║  make version-auto   - Detecta tipo baseado em commits       ║"
 	@echo "╚══════════════════════════════════════════════════════════════╝"
 
 # Build do projeto
@@ -108,6 +114,23 @@ info:
 	@echo "║ OS: $$(uname -s) $$(uname -m)"
 	@echo "╚══════════════════════════════════════════════════════════════╝"
 
+# Versionamento
+version-patch:
+	@echo "📦 Incrementando versão PATCH..."
+	@./scripts/bump-version.sh patch
+
+version-minor:
+	@echo "📦 Incrementando versão MINOR..."
+	@./scripts/bump-version.sh minor
+
+version-major:
+	@echo "📦 Incrementando versão MAJOR..."
+	@./scripts/bump-version.sh major
+
+version-auto:
+	@echo "🤖 Detectando tipo de versão automaticamente..."
+	@./scripts/auto-version.sh
+
 # Atalhos úteis
 b: build
 c: clean
@@ -117,3 +140,7 @@ p: package
 i: install
 l: lint
 lf: lint-fix
+vp: version-patch
+vm: version-minor
+vM: version-major
+va: version-auto

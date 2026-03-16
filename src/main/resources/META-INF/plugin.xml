@@ -32,6 +32,10 @@
             <li>Fix icons release</li>
             <li>Add drafts rename function</li>
         </ul>
+        <h3>1.0.2</h3>
+        <ul>
+            <li>Documentation improvements and code adjustments</li>
+        </ul>
     ]]></change-notes>
 
     <depends>com.intellij.modules.platform</depends>

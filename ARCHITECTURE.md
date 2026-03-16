@@ -1,8 +1,8 @@
-# RaptorClient — Architecture
+# RaptorClient — Arquitetura
 
-This document describes the internal architecture of RaptorClient, a JetBrains IDE plugin for HTTP REST requests. It is intended to help contributors understand the codebase and navigate the modules efficiently.
+Este documento descreve a arquitetura interna do RaptorClient, um plugin de IDE JetBrains para requisições HTTP REST. Ele foi criado para ajudar contribuidores a entender a base de código e navegar pelos módulos de forma eficiente.
 
-## High-Level Overview
+## Visão Geral de Alto Nível
 
 ```
 ┌─────────────────────────────────────────────────────────┐
@@ -36,164 +36,164 @@ This document describes the internal architecture of RaptorClient, a JetBrains I
 └─────────────────────────────────────────────────────────┘
 ```
 
-## Package Structure
+## Estrutura de Pacotes
 
-All source code lives under `com.raptorclient` in `src/main/kotlin/com/raptorclient/`.
+Todo o código-fonte está em `com.raptorclient` em `src/main/kotlin/com/raptorclient/`.
 
 ```
 com.raptorclient/
-├── actions/        # IDE actions triggered by toolbar buttons and menus
-├── editor/         # Custom file editor for HTTP requests (tabs)
-├── models/         # Data classes and enums (pure Kotlin, no IDE deps)
-├── services/       # Business logic: HTTP execution, storage, environments
-├── toolwindow/     # Sidebar tool window (collection tree)
-└── ui/             # Swing UI components for the request editor
+├── actions/        # Ações da IDE disparadas por botões da toolbar e menus
+├── editor/         # Editor de arquivo customizado para requisições HTTP (abas)
+├── models/         # Classes de dados e enums (Kotlin puro, sem deps da IDE)
+├── services/       # Lógica de negócio: execução HTTP, armazenamento, ambientes
+├── toolwindow/     # Janela de ferramenta lateral (árvore de coleções)
+└── ui/             # Componentes UI Swing para o editor de requisições
 ```
 
 ---
 
-## Module Details
+## Detalhes dos Módulos
 
 ### `models/`
 
-Pure Kotlin data classes with no IDE dependencies. Serialized to/from JSON via Jackson.
+Classes de dados Kotlin puras sem dependências da IDE. Serializadas de/para JSON via Jackson.
 
-| File | Description |
-|------|-------------|
-| `RequestItem.kt` | Core model for an HTTP request. Contains `KeyValuePair`, `RequestBody`, `AuthConfig`, and related enums (`BodyType`, `RawBodyType`, `AuthType`, `ApiKeyLocation`). |
-| `Collection.kt` | A collection of requests, drafts, and folders. Provides lookup/filtering helpers. |
-| `FolderItem.kt` | Represents a folder that can hold requests and subfolders (hierarchical via `parentId`). |
-| `HttpMethod.kt` | Enum of supported HTTP methods with display color for the UI. |
-| `HttpResponse.kt` | Immutable response model with formatted size/time helpers. |
+| Arquivo | Descrição |
+|---------|-----------|
+| `RequestItem.kt` | Modelo principal para uma requisição HTTP. Contém `KeyValuePair`, `RequestBody`, `AuthConfig` e enums relacionados (`BodyType`, `RawBodyType`, `AuthType`, `ApiKeyLocation`). |
+| `Collection.kt` | Uma coleção de requisições, rascunhos e pastas. Fornece helpers de busca/filtragem. |
+| `FolderItem.kt` | Representa uma pasta que pode conter requisições e subpastas (hierárquico via `parentId`). |
+| `HttpMethod.kt` | Enum dos métodos HTTP suportados com cor de exibição para a UI. |
+| `HttpResponse.kt` | Modelo de resposta imutável com helpers de tamanho/tempo formatados. |
 
-**Key design decisions:**
-- Models use `@JsonIgnoreProperties(ignoreUnknown = true)` for forward compatibility.
-- Mutable fields (`var`) are used because the UI binds directly to model properties.
-- `RequestItem.duplicate()` creates a deep copy with a new ID.
+**Principais decisões de design:**
+- Modelos usam `@JsonIgnoreProperties(ignoreUnknown = true)` para compatibilidade futura.
+- Campos mutáveis (`var`) são usados porque a UI se vincula diretamente às propriedades do modelo.
+- `RequestItem.duplicate()` cria uma cópia profunda com um novo ID.
 
 ---
 
 ### `services/`
 
-Business logic layer. Services have no direct Swing/UI dependencies.
+Camada de lógica de negócio. Serviços não têm dependências diretas de Swing/UI.
 
-| File | Description |
-|------|-------------|
-| `HttpClientService.kt` | Executes HTTP requests using OkHttp. Handles all body types, authentication, query parameters, and environment variable resolution. |
-| `RequestStorageService.kt` | Persists the request collection to the IDE's project-level XML storage (`raptorClient.xml`). Implements `PersistentStateComponent`. |
-| `EnvironmentService.kt` | Manages environment variables (e.g., Development, Staging). Persisted in `raptorClientEnv.xml`. Resolves `{{variable}}` placeholders. |
-| `CurlParser.kt` | Parses cURL commands into `RequestItem` objects. Supports headers, body types, auth, cookies, user-agent, and more. |
+| Arquivo | Descrição |
+|---------|-----------|
+| `HttpClientService.kt` | Executa requisições HTTP usando OkHttp. Lida com todos os tipos de body, autenticação, parâmetros de query e resolução de variáveis de ambiente. |
+| `RequestStorageService.kt` | Persiste a coleção de requisições no armazenamento XML em nível de projeto da IDE (`raptorClient.xml`). Implementa `PersistentStateComponent`. |
+| `EnvironmentService.kt` | Gerencia variáveis de ambiente (ex: Development, Staging). Persistido em `raptorClientEnv.xml`. Resolve placeholders `{{variavel}}`. |
+| `CurlParser.kt` | Faz parsing de comandos cURL em objetos `RequestItem`. Suporta headers, tipos de body, auth, cookies, user-agent e mais. |
 
-**Key design decisions:**
-- `RequestStorageService` and `EnvironmentService` are project-level services registered in `plugin.xml`.
-- Both use a listener pattern (`CollectionChangeListener`, `EnvironmentChangeListener`) to notify the UI of changes.
-- `HttpClientService` is stateless (except for the shared OkHttp client instance) and can be instantiated freely.
-- `CurlParser` is a standalone class with no dependencies — easy to test in isolation.
+**Principais decisões de design:**
+- `RequestStorageService` e `EnvironmentService` são serviços em nível de projeto registrados no `plugin.xml`.
+- Ambos usam um padrão de listener (`CollectionChangeListener`, `EnvironmentChangeListener`) para notificar a UI de mudanças.
+- `HttpClientService` é stateless (exceto pela instância compartilhada do cliente OkHttp) e pode ser instanciado livremente.
+- `CurlParser` é uma classe standalone sem dependências — fácil de testar isoladamente.
 
 ---
 
 ### `actions/`
 
-IDE actions registered in `plugin.xml` under the `RaptorClient.ToolbarActions` group. Each extends `AnAction`.
+Ações da IDE registradas no `plugin.xml` sob o grupo `RaptorClient.ToolbarActions`. Cada uma estende `AnAction`.
 
-| File | Description |
-|------|-------------|
-| `NewRequestAction.kt` | Creates a new draft request and opens it in the editor. |
-| `NewFolderAction.kt` | Prompts for a folder name and adds it to the collection. |
-| `ImportCurlAction.kt` | Opens a dialog to paste a cURL command, parses it, and creates a draft. |
-| `RefreshCollectionsAction.kt` | Triggers a tree refresh in the tool window sidebar. |
+| Arquivo | Descrição |
+|---------|-----------|
+| `NewRequestAction.kt` | Cria uma nova requisição rascunho e a abre no editor. |
+| `NewFolderAction.kt` | Solicita um nome de pasta e a adiciona à coleção. |
+| `ImportCurlAction.kt` | Abre um diálogo para colar um comando cURL, faz o parsing e cria um rascunho. |
+| `RefreshCollectionsAction.kt` | Dispara uma atualização da árvore na barra lateral da janela de ferramenta. |
 
 ---
 
 ### `editor/`
 
-Custom `FileEditor` implementation that opens HTTP requests as IDE tabs (like code files).
+Implementação customizada de `FileEditor` que abre requisições HTTP como abas da IDE (como arquivos de código).
 
-| File | Description |
-|------|-------------|
-| `RaptorVirtualFile.kt` | Virtual file backed by a `RequestItem`. Also contains `RaptorFileType` and `RaptorFileSystem`. |
-| `RaptorRequestEditor.kt` | The `FileEditor` implementation. Creates a `RequestEditorPanel` as its UI. |
-| `RaptorRequestEditorProvider.kt` | Tells the IDE to use `RaptorRequestEditor` for `RaptorVirtualFile` instances. |
-| `RaptorEditorManager.kt` | Singleton that tracks open request editors and prevents duplicate tabs. |
+| Arquivo | Descrição |
+|---------|-----------|
+| `RaptorVirtualFile.kt` | Arquivo virtual baseado em um `RequestItem`. Também contém `RaptorFileType` e `RaptorFileSystem`. |
+| `RaptorRequestEditor.kt` | A implementação do `FileEditor`. Cria um `RequestEditorPanel` como sua UI. |
+| `RaptorRequestEditorProvider.kt` | Informa à IDE para usar `RaptorRequestEditor` para instâncias de `RaptorVirtualFile`. |
+| `RaptorEditorManager.kt` | Singleton que rastreia editores de requisição abertos e previne abas duplicadas. |
 
-**Key design decisions:**
-- Uses a custom `VirtualFileSystem` with the `raptor://` protocol.
-- `RaptorEditorManager` is an `object` (singleton) to provide global tab management.
-- Editor initialization is deferred via `SwingUtilities.invokeLater` to avoid blocking the EDT.
+**Principais decisões de design:**
+- Usa um `VirtualFileSystem` customizado com o protocolo `raptor://`.
+- `RaptorEditorManager` é um `object` (singleton) para fornecer gerenciamento global de abas.
+- A inicialização do editor é adiada via `SwingUtilities.invokeLater` para evitar bloquear o EDT.
 
 ---
 
 ### `toolwindow/`
 
-The sidebar panel visible in the IDE.
+O painel lateral visível na IDE.
 
-| File | Description |
-|------|-------------|
-| `RaptorToolWindowFactory.kt` | Factory registered in `plugin.xml` that creates the tool window content. |
-| `RaptorToolWindowPanel.kt` | A `SimpleToolWindowPanel` with a JTree showing folders, requests, and drafts. Includes toolbar buttons and a context menu (right-click). |
+| Arquivo | Descrição |
+|---------|-----------|
+| `RaptorToolWindowFactory.kt` | Factory registrada no `plugin.xml` que cria o conteúdo da janela de ferramenta. |
+| `RaptorToolWindowPanel.kt` | Um `SimpleToolWindowPanel` com uma JTree mostrando pastas, requisições e rascunhos. Inclui botões de toolbar e um menu de contexto (clique direito). |
 
-**Key design decisions:**
-- The tree is rebuilt entirely on each refresh (`refreshTree()`), which is simple and correct for the expected data size.
-- Listens to `RequestStorageService` changes to auto-refresh.
-- Custom `TreeCellRenderer` shows HTTP method names with color coding.
+**Principais decisões de design:**
+- A árvore é reconstruída completamente a cada atualização (`refreshTree()`), o que é simples e correto para o tamanho de dados esperado.
+- Escuta mudanças do `RequestStorageService` para auto-atualizar.
+- `TreeCellRenderer` customizado mostra nomes de métodos HTTP com codificação de cores.
 
 ---
 
 ### `ui/`
 
-Reusable Swing panels used inside the request editor.
+Painéis Swing reutilizáveis usados dentro do editor de requisições.
 
-| File | Description |
-|------|-------------|
-| `RequestEditorPanel.kt` | Main editor panel. Combines the URL bar, method selector, Send/Save buttons, request tabs (Params, Body, Headers, Auth), and response viewer. |
-| `KeyValuePanel.kt` | A table-based editor for key-value pairs (used for headers, query params, form data, URL-encoded data). |
-| `BodyEditorPanel.kt` | Manages body type selection (none, raw, form-data, URL-encoded) with a `CardLayout`. |
-| `AuthPanel.kt` | Manages auth type selection (None, Bearer, Basic, API Key) with a `CardLayout`. |
+| Arquivo | Descrição |
+|---------|-----------|
+| `RequestEditorPanel.kt` | Painel editor principal. Combina a barra de URL, seletor de método, botões Send/Save, abas de requisição (Params, Body, Headers, Auth) e visualizador de resposta. |
+| `KeyValuePanel.kt` | Um editor baseado em tabela para pares chave-valor (usado para headers, query params, form data, dados URL-encoded). |
+| `BodyEditorPanel.kt` | Gerencia seleção de tipo de body (nenhum, raw, form-data, URL-encoded) com um `CardLayout`. |
+| `AuthPanel.kt` | Gerencia seleção de tipo de auth (None, Bearer, Basic, API Key) com um `CardLayout`. |
 
-**Key design decisions:**
-- HTTP requests are executed on a pooled thread (`ApplicationManager.getApplication().executeOnPooledThread`) to avoid blocking the UI.
-- JSON responses are pretty-printed using Gson.
-- Environment variable resolution happens at request execution time, not at edit time.
-
----
-
-## Data Persistence
-
-| File | Storage |
-|------|---------|
-| `raptorClient.xml` | Requests, drafts, and folders (JSON inside IDE XML) |
-| `raptorClientEnv.xml` | Environment variables (JSON inside IDE XML) |
-
-Both files live in the project's `.idea/` directory and are managed by IntelliJ's `PersistentStateComponent` mechanism.
+**Principais decisões de design:**
+- Requisições HTTP são executadas em uma thread pooled (`ApplicationManager.getApplication().executeOnPooledThread`) para evitar bloquear a UI.
+- Respostas JSON são formatadas usando Gson.
+- Resolução de variáveis de ambiente acontece no momento da execução da requisição, não no momento da edição.
 
 ---
 
-## Plugin Registration (`plugin.xml`)
+## Persistência de Dados
 
-All extension points and actions are declared in `src/main/resources/META-INF/plugin.xml`:
+| Arquivo | Armazenamento |
+|---------|---------------|
+| `raptorClient.xml` | Requisições, rascunhos e pastas (JSON dentro do XML da IDE) |
+| `raptorClientEnv.xml` | Variáveis de ambiente (JSON dentro do XML da IDE) |
 
-- **Tool Window** — `RaptorToolWindowFactory` anchored to the right sidebar
+Ambos os arquivos ficam no diretório `.idea/` do projeto e são gerenciados pelo mecanismo `PersistentStateComponent` do IntelliJ.
+
+---
+
+## Registro do Plugin (`plugin.xml`)
+
+Todos os pontos de extensão e ações são declarados em `src/main/resources/META-INF/plugin.xml`:
+
+- **Tool Window** — `RaptorToolWindowFactory` ancorada na barra lateral direita
 - **File Editor Provider** — `RaptorRequestEditorProvider`
 - **Project Services** — `RequestStorageService`, `EnvironmentService`
 - **Notification Group** — `RaptorClient.Notifications`
-- **Actions** — New Request, New Folder, Import cURL, Refresh
+- **Actions** — Nova Requisição, Nova Pasta, Importar cURL, Atualizar
 
 ---
 
-## Dependencies
+## Dependências
 
-| Library | Purpose |
-|---------|---------|
-| OkHttp 4.x | HTTP client for executing requests |
-| Jackson + Kotlin Module | JSON serialization for persisted models |
-| Gson | JSON pretty-printing for response display |
-| IntelliJ Platform SDK | IDE integration (services, editors, UI) |
+| Biblioteca | Propósito |
+|------------|-----------|
+| OkHttp 4.x | Cliente HTTP para executar requisições |
+| Jackson + Kotlin Module | Serialização JSON para modelos persistidos |
+| Gson | Formatação JSON para exibição de respostas |
+| IntelliJ Platform SDK | Integração com a IDE (serviços, editores, UI) |
 
 ---
 
-## Build & Tooling
+## Build & Ferramentas
 
-- **Gradle** with the IntelliJ Platform Gradle Plugin (`org.jetbrains.intellij.platform`)
-- **ktlint** for code style enforcement
-- **Qodana** for static analysis (configured in `qodana.yaml`)
-- **Makefile** provides convenient shortcuts for all common tasks
+- **Gradle** com o IntelliJ Platform Gradle Plugin (`org.jetbrains.intellij.platform`)
+- **ktlint** para aplicação de estilo de código
+- **Qodana** para análise estática (configurado em `qodana.yaml`)
+- **Makefile** fornece atalhos convenientes para todas as tarefas comuns

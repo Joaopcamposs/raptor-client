@@ -5,7 +5,7 @@
 </p>
 
 <p align="center">
-  <strong>A lightweight HTTP REST client plugin for JetBrains IDEs</strong>
+  <strong>Um plugin leve de cliente HTTP REST para IDEs JetBrains</strong>
 </p>
 
 <p align="center">
@@ -15,31 +15,31 @@
 
 ---
 
-RaptorClient lets you create, organize, and execute HTTP requests directly inside IntelliJ IDEA, PyCharm, WebStorm, and other JetBrains IDEs — no need to switch to an external tool like Postman.
+O RaptorClient permite criar, organizar e executar requisições HTTP diretamente dentro do IntelliJ IDEA, PyCharm, WebStorm e outras IDEs JetBrains — sem necessidade de alternar para uma ferramenta externa como Postman.
 
-## Features
+## Funcionalidades
 
-- **All HTTP methods** — GET, POST, PUT, PATCH, DELETE, HEAD, OPTIONS
-- **Tabbed editor** — each request opens as an IDE tab, just like a code file
-- **Collections & folders** — organize requests hierarchically; everything is persisted per-project
-- **Drafts** — quick throwaway requests that live outside your collections
-- **cURL import** — paste a cURL command and get a ready-to-send request
-- **Environment variables** — define variables per environment (dev, staging, prod) and use `{{variable}}` in URLs, headers, and bodies
-- **Authentication** — Bearer Token, Basic Auth, and API Key (header or query param)
-- **Multiple body types** — raw (JSON, XML, Text, HTML, JS), form-data, x-www-form-urlencoded
-- **Response viewer** — formatted JSON, raw body, and response headers in separate tabs with status code, time, and size
+- **Todos os métodos HTTP** — GET, POST, PUT, PATCH, DELETE, HEAD, OPTIONS
+- **Editor em abas** — cada requisição abre como uma aba da IDE, igual a um arquivo de código
+- **Coleções e pastas** — organize requisições hierarquicamente; tudo é persistido por projeto
+- **Rascunhos** — requisições rápidas e descartáveis que ficam fora das suas coleções
+- **Importação de cURL** — cole um comando cURL e obtenha uma requisição pronta para enviar
+- **Variáveis de ambiente** — defina variáveis por ambiente (dev, staging, prod) e use `{{variavel}}` em URLs, headers e bodies
+- **Autenticação** — Bearer Token, Basic Auth e API Key (header ou query param)
+- **Múltiplos tipos de body** — raw (JSON, XML, Text, HTML, JS), form-data, x-www-form-urlencoded
+- **Visualizador de resposta** — JSON formatado, body raw e headers de resposta em abas separadas com código de status, tempo e tamanho
 
-## Installation
+## Instalação
 
-### From the JetBrains Marketplace (recommended)
+### Do JetBrains Marketplace (recomendado)
 
-1. Open your IDE → **Settings** → **Plugins** → **Marketplace**
-2. Search for **RaptorClient**
-3. Click **Install** and restart the IDE
+1. Abra sua IDE → **Settings** → **Plugins** → **Marketplace**
+2. Busque por **RaptorClient**
+3. Clique em **Install** e reinicie a IDE
 
-Or install directly from the [Marketplace page](https://plugins.jetbrains.com/plugin/30072-raptor-client).
+Ou instale diretamente da [página do Marketplace](https://plugins.jetbrains.com/plugin/30072-raptor-client).
 
-### From source
+### Do código-fonte
 
 ```bash
 git clone https://github.com/Joaopcamposs/raptor-client.git
@@ -47,81 +47,81 @@ cd raptor-client
 make install
 ```
 
-The distributable ZIP will be at `build/distributions/raptor-client-*.zip`.
-Install it via **Settings** → **Plugins** → **⚙️** → **Install Plugin from Disk…**
+O arquivo ZIP distribuível estará em `build/distributions/raptor-client-*.zip`.
+Instale via **Settings** → **Plugins** → **⚙️** → **Install Plugin from Disk…**
 
-## Quick Start
+## Início Rápido
 
-1. Click the **RaptorClient** icon in the right sidebar (or **View → Tool Windows → RaptorClient**).
-2. Click **+** to create a new request.
-3. Choose a method, enter a URL, configure headers/body/auth as needed.
-4. Click **Send**.
-5. View the response (JSON, Raw, Headers) in the bottom panel.
+1. Clique no ícone **RaptorClient** na barra lateral direita (ou **View → Tool Windows → RaptorClient**).
+2. Clique em **+** para criar uma nova requisição.
+3. Escolha um método, insira uma URL, configure headers/body/auth conforme necessário.
+4. Clique em **Send**.
+5. Visualize a resposta (JSON, Raw, Headers) no painel inferior.
 
-### Importing cURL
+### Importando cURL
 
-Click **Import** in the toolbar, paste your cURL command, and press **OK**. The request will be created automatically with headers, body, and auth pre-filled.
+Clique em **Import** na barra de ferramentas, cole seu comando cURL e pressione **OK**. A requisição será criada automaticamente com headers, body e auth pré-preenchidos.
 
-### Environment Variables
+### Variáveis de Ambiente
 
-Create environments (e.g., Development, Production) with key-value pairs. Reference them anywhere with `{{key}}`:
+Crie ambientes (ex: Development, Production) com pares chave-valor. Referencie-os em qualquer lugar com `{{chave}}`:
 
 ```
 {{base_url}}/api/v1/users
 Authorization: Bearer {{access_token}}
 ```
 
-## Requirements
+## Requisitos
 
-| Requirement | Version |
-|-------------|---------|
-| JetBrains IDE | 2024.3+ (IntelliJ IDEA, PyCharm, WebStorm, etc.) |
-| JDK (for building from source) | 21+ (auto-downloaded by Gradle toolchain) |
+| Requisito | Versão |
+|-----------|--------|
+| IDE JetBrains | 2024.3+ (IntelliJ IDEA, PyCharm, WebStorm, etc.) |
+| JDK (para build do código-fonte) | 21+ (baixado automaticamente pelo Gradle toolchain) |
 
-## Development
-
-```bash
-make help       # Show all available commands
-make build      # Compile the plugin
-make run        # Launch a sandboxed IDE with the plugin
-make test       # Run unit tests
-make lint       # Check code style (ktlint)
-make lint-fix   # Auto-fix code style
-make package    # Create distributable ZIP
-make verify     # Verify plugin compatibility
-make clean      # Clean build artifacts
-```
-
-Or use Gradle directly:
+## Desenvolvimento
 
 ```bash
-./gradlew build          # Compile
-./gradlew runIde         # Sandboxed IDE
-./gradlew buildPlugin    # Create ZIP
-./gradlew test           # Run tests
-./gradlew ktlintFormat   # Format code
+make help       # Mostra todos os comandos disponíveis
+make build      # Compila o plugin
+make run        # Inicia uma IDE sandbox com o plugin
+make test       # Executa testes unitários
+make lint       # Verifica estilo do código (ktlint)
+make lint-fix   # Corrige estilo automaticamente
+make package    # Cria o ZIP distribuível
+make verify     # Verifica compatibilidade do plugin
+make clean      # Limpa artefatos de build
 ```
 
-## Project Structure
+Ou use o Gradle diretamente:
+
+```bash
+./gradlew build          # Compilar
+./gradlew runIde         # IDE sandbox
+./gradlew buildPlugin    # Criar ZIP
+./gradlew test           # Executar testes
+./gradlew ktlintFormat   # Formatar código
+```
+
+## Estrutura do Projeto
 
 ```
 src/main/kotlin/com/raptorclient/
-├── actions/      # IDE actions (New Request, New Folder, Import cURL, Refresh)
-├── editor/       # Custom FileEditor that opens requests as IDE tabs
-├── models/       # Data classes: RequestItem, Collection, HttpResponse, etc.
-├── services/     # Business logic: HTTP execution, storage, environments, cURL parsing
-├── toolwindow/   # Sidebar panel with the collection tree
-└── ui/           # Swing panels: request editor, auth, body, key-value tables
+├── actions/      # Ações da IDE (Nova Requisição, Nova Pasta, Importar cURL, Atualizar)
+├── editor/       # FileEditor customizado que abre requisições como abas da IDE
+├── models/       # Classes de dados: RequestItem, Collection, HttpResponse, etc.
+├── services/     # Lógica de negócio: execução HTTP, armazenamento, ambientes, parsing de cURL
+├── toolwindow/   # Painel lateral com a árvore de coleções
+└── ui/           # Painéis Swing: editor de requisição, auth, body, tabelas chave-valor
 ```
 
-For a detailed explanation of the architecture and each module, see [ARCHITECTURE.md](ARCHITECTURE.md).
+Para uma explicação detalhada da arquitetura e cada módulo, veja [ARCHITECTURE.md](ARCHITECTURE.md).
 
-## Contributing
+## Contribuindo
 
-Contributions are welcome! Please read [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines on setting up the dev environment, code style, and submitting pull requests.
+Contribuições são bem-vindas! Por favor, leia [CONTRIBUTING.md](CONTRIBUTING.md) para orientações sobre configuração do ambiente de desenvolvimento, estilo de código e envio de pull requests.
 
-## License
+## Licença
 
-This project is licensed under the [MIT License](LICENSE).
+Este projeto está licenciado sob a [Licença MIT](LICENSE).
 
-Built with the [IntelliJ Platform SDK](https://plugins.jetbrains.com/docs/intellij/welcome.html).
+Construído com o [IntelliJ Platform SDK](https://plugins.jetbrains.com/docs/intellij/welcome.html).

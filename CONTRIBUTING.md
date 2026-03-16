@@ -1,114 +1,114 @@
-# Contributing to RaptorClient
+# Contribuindo para o RaptorClient
 
-Thank you for your interest in contributing to RaptorClient! This guide will help you get started.
+Obrigado pelo seu interesse em contribuir para o RaptorClient! Este guia vai ajudá-lo a começar.
 
-## Getting Started
+## Começando
 
-### Prerequisites
+### Pré-requisitos
 
-- **JDK 21+** (automatically downloaded by Gradle toolchain if not present)
-- **Gradle 8.0+** (included via wrapper)
-- A JetBrains IDE (IntelliJ IDEA recommended for development)
+- **JDK 21+** (baixado automaticamente pelo Gradle toolchain se não estiver presente)
+- **Gradle 8.0+** (incluído via wrapper)
+- Uma IDE JetBrains (IntelliJ IDEA recomendado para desenvolvimento)
 
-### Setting Up the Development Environment
+### Configurando o Ambiente de Desenvolvimento
 
-1. Fork and clone the repository:
+1. Faça fork e clone o repositório:
    ```bash
    git clone https://github.com/joaopcamposs/raptor-client.git
    cd raptor-client
    ```
 
-2. Open the project in IntelliJ IDEA.
+2. Abra o projeto no IntelliJ IDEA.
 
-3. Build the project:
+3. Faça o build do projeto:
    ```bash
    make build
    ```
 
-4. Run a sandboxed IDE with the plugin loaded:
+4. Execute uma IDE sandbox com o plugin carregado:
    ```bash
    make run
    ```
 
-## Development Workflow
+## Fluxo de Desenvolvimento
 
-### Code Style
+### Estilo de Código
 
-- **Code** is written in **English**
-- **Docstrings and comments** are written in **Portuguese (pt-BR)**
-- Code formatting is enforced by [ktlint](https://pinterest.github.io/ktlint/)
-- Run `make lint` to check and `make lint-fix` to auto-fix formatting issues
+- **Código** é escrito em **Inglês**
+- **Docstrings e comentários** são escritos em **Português (pt-BR)**
+- Formatação de código é aplicada pelo [ktlint](https://pinterest.github.io/ktlint/)
+- Execute `make lint` para verificar e `make lint-fix` para corrigir problemas de formatação automaticamente
 
-### Project Structure
+### Estrutura do Projeto
 
-See [ARCHITECTURE.md](ARCHITECTURE.md) for a detailed explanation of each module.
+Veja [ARCHITECTURE.md](ARCHITECTURE.md) para uma explicação detalhada de cada módulo.
 
-### Making Changes
+### Fazendo Alterações
 
-1. Create a feature branch from `main`:
+1. Crie uma branch de feature a partir da `main`:
    ```bash
-   git checkout -b feature/your-feature-name
+   git checkout -b feature/nome-da-sua-feature
    ```
 
-2. Make your changes following existing patterns.
+2. Faça suas alterações seguindo os padrões existentes.
 
-3. Run linting and tests:
+3. Execute linting e testes:
    ```bash
    make lint-fix
    make test
    ```
 
-4. Test the plugin manually:
+4. Teste o plugin manualmente:
    ```bash
    make run
    ```
 
-5. Commit your changes with a meaningful message:
+5. Faça commit das suas alterações com uma mensagem significativa:
    ```bash
-   git commit -m "feat: add support for XYZ"
+   git commit -m "feat: adiciona suporte para XYZ"
    ```
 
-### Commit Message Convention
+### Convenção de Mensagens de Commit
 
-We follow [Conventional Commits](https://www.conventionalcommits.org/):
+Seguimos [Conventional Commits](https://www.conventionalcommits.org/):
 
-- `feat:` — A new feature
-- `fix:` — A bug fix
-- `docs:` — Documentation changes
-- `refactor:` — Code refactoring without feature changes
-- `test:` — Adding or updating tests
-- `chore:` — Maintenance tasks (build, CI, deps)
+- `feat:` — Uma nova funcionalidade
+- `fix:` — Correção de bug
+- `docs:` — Mudanças na documentação
+- `refactor:` — Refatoração de código sem mudanças de funcionalidade
+- `test:` — Adição ou atualização de testes
+- `chore:` — Tarefas de manutenção (build, CI, deps)
 
-### Submitting a Pull Request
+### Enviando um Pull Request
 
-1. Push your branch to your fork.
-2. Open a Pull Request against the `main` branch.
-3. Fill out the PR description explaining **what** and **why**.
-4. Ensure CI checks pass (lint, build, tests).
-5. A maintainer will review your PR.
+1. Faça push da sua branch para o seu fork.
+2. Abra um Pull Request contra a branch `main`.
+3. Preencha a descrição do PR explicando **o que** e **por que**.
+4. Certifique-se de que as verificações de CI passam (lint, build, testes).
+5. Um mantenedor revisará seu PR.
 
-## Useful Commands
+## Comandos Úteis
 
-| Command          | Description                           |
-|------------------|---------------------------------------|
-| `make build`     | Compile the plugin                    |
-| `make run`       | Launch a sandboxed IDE with the plugin|
-| `make test`      | Run unit tests                        |
-| `make lint`      | Check code style (ktlint)            |
-| `make lint-fix`  | Auto-fix code style                  |
-| `make package`   | Create distributable ZIP              |
-| `make verify`    | Verify plugin compatibility           |
-| `make clean`     | Clean build artifacts                 |
+| Comando          | Descrição                                    |
+|------------------|----------------------------------------------|
+| `make build`     | Compila o plugin                             |
+| `make run`       | Inicia uma IDE sandbox com o plugin          |
+| `make test`      | Executa testes unitários                     |
+| `make lint`      | Verifica estilo do código (ktlint)           |
+| `make lint-fix`  | Corrige estilo automaticamente               |
+| `make package`   | Cria o ZIP distribuível                      |
+| `make verify`    | Verifica compatibilidade do plugin           |
+| `make clean`     | Limpa artefatos de build                     |
 
-## Reporting Issues
+## Reportando Problemas
 
-- Use [GitHub Issues](https://github.com/Joaopcamposs/raptor-client/issues) to report bugs or request features.
-- Include steps to reproduce, expected behavior, and IDE version when reporting bugs.
+- Use [GitHub Issues](https://github.com/Joaopcamposs/raptor-client/issues) para reportar bugs ou solicitar funcionalidades.
+- Inclua passos para reproduzir, comportamento esperado e versão da IDE ao reportar bugs.
 
-## Code of Conduct
+## Código de Conduta
 
-Please be respectful and constructive. We are committed to providing a welcoming and inclusive experience for everyone.
+Por favor, seja respeitoso e construtivo. Estamos comprometidos em fornecer uma experiência acolhedora e inclusiva para todos.
 
-## License
+## Licença
 
-By contributing, you agree that your contributions will be licensed under the [MIT License](LICENSE).
+Ao contribuir, você concorda que suas contribuições serão licenciadas sob a [Licença MIT](LICENSE).
