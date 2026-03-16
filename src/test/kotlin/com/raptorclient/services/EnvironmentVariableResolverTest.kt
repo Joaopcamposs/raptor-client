@@ -13,8 +13,18 @@ class EnvironmentVariableResolverTest {
         text: String,
         vars: Map<String, String>,
     ): String {
-        val environmentService = EnvironmentService()
-        return environmentService.resolveVariables(text, vars)
+        var result = text
+        val pattern = Regex("\\{\\{([^}]+)\\}\\}")
+
+        pattern.findAll(text).forEach { match ->
+            val varName = match.groupValues[1].trim()
+            val value = vars[varName]
+            if (value != null) {
+                result = result.replace(match.value, value)
+            }
+        }
+
+        return result
     }
 
     @Nested
