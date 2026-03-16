@@ -1,7 +1,7 @@
 plugins {
     id("java")
     id("org.jetbrains.kotlin.jvm") version "2.1.20"
-    id("org.jetbrains.intellij.platform") version "2.5.0"
+    id("org.jetbrains.intellij.platform") version "2.13.1"
     id("org.jlleitschuh.gradle.ktlint") version "12.1.2"
 }
 
@@ -51,7 +51,7 @@ intellijPlatform {
 
     pluginVerification {
         ides {
-            ide(org.jetbrains.intellij.platform.gradle.IntelliJPlatformType.IntellijIdeaCommunity, "2024.3")
+            recommended()
         }
     }
 
@@ -71,6 +71,7 @@ intellijPlatform {
 tasks {
     test {
         useJUnitPlatform()
+        jvmArgs("-XX:+UnlockDiagnosticVMOptions", "-XX:-UseSharedSpaces")
     }
 }
 
