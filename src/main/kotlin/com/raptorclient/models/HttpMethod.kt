@@ -14,6 +14,6 @@ enum class HttpMethod(
     ;
 
     companion object {
-        fun fromString(method: String): HttpMethod = values().find { it.name.equals(method, ignoreCase = true) } ?: GET
+        fun fromString(method: String): HttpMethod = entries.find { it.name.equals(method, ignoreCase = true) } ?: GET
     }
 }

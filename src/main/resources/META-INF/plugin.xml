@@ -1,8 +1,8 @@
 <idea-plugin>
     <id>com.raptorclient.plugin</id>
     <name>RaptorClient</name>
-    <version>1.0.1</version>
-    <vendor email="joaopcamposs@outlook.com" url="https://github.com/Joaopcamposs/raptor-client">RaptorClient</vendor>
+    <version>1.0.2</version>
+    <vendor email="joaopcamposs@outlook.com" url="https://github.com/Joaopcamposs/raptor-client">Joaopcamposs</vendor>
 
     <description><![CDATA[
         <h2>RaptorClient - HTTP REST Client for JetBrains IDEs</h2>
@@ -31,6 +31,10 @@
         <ul>
             <li>Fix icons release</li>
             <li>Add drafts rename function</li>
+        </ul>
+        <h3>1.0.2</h3>
+        <ul>
+            <li>Documentation improvements and code adjustments</li>
         </ul>
     ]]></change-notes>
 

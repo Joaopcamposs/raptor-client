@@ -17,7 +17,7 @@ class BodyEditorPanel : JPanel(BorderLayout()) {
     private val formDataRadio = JBRadioButton("form-data")
     private val urlEncodedRadio = JBRadioButton("x-www-form-urlencoded")
 
-    private val rawTypeCombo = JComboBox(RawBodyType.values())
+    private val rawTypeCombo = JComboBox(RawBodyType.entries.toTypedArray())
     private val rawTextArea = JBTextArea()
     private val formDataPanel = KeyValuePanel("Form Data")
     private val urlEncodedPanel = KeyValuePanel("URL Encoded")

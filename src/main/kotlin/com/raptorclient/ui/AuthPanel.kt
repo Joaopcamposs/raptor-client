@@ -22,7 +22,7 @@ class AuthPanel : JPanel(BorderLayout()) {
     private val basicPasswordField = JBPasswordField()
     private val apiKeyNameField = JBTextField()
     private val apiKeyValueField = JBTextField()
-    private val apiKeyLocationCombo = JComboBox(ApiKeyLocation.values())
+    private val apiKeyLocationCombo = JComboBox(ApiKeyLocation.entries.toTypedArray())
 
     private val contentPanel = JPanel(CardLayout())
 
