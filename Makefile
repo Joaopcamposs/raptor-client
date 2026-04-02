@@ -76,11 +76,16 @@ install: clean build package
 # Publicar no Marketplace (requer PUBLISH_TOKEN)
 publish:
 	@echo "📤 Publicando no JetBrains Marketplace..."
-	@if [ -z "$$PUBLISH_TOKEN" ]; then \
+	@if [ -f .env ]; then \
+		set -a; . ./.env; set +a; \
+	fi; \
+	if [ -z "$$PUBLISH_TOKEN" ]; then \
 		echo "❌ Erro: PUBLISH_TOKEN não definido"; \
-		echo "   Use: export PUBLISH_TOKEN=seu_token"; \
+		echo "   Adicione PUBLISH_TOKEN=seu_token no arquivo .env"; \
+		echo "   Ou exporte: export PUBLISH_TOKEN=seu_token"; \
 		exit 1; \
-	fi
+	fi; \
+	echo "🔑 Token encontrado (tamanho: $${#PUBLISH_TOKEN} chars)"; \
 	$(GRADLE) publishPlugin --no-daemon
 
 # Baixar dependências
