@@ -171,7 +171,7 @@ class HttpClientService {
             BodyType.BINARY -> null
         }
 
-    private fun urlEncode(value: String): String = java.net.URLEncoder.encode(value, "UTF-8")
+    private fun urlEncode(value: String): String = java.net.URLEncoder.encode(value, Charsets.UTF_8)
 
     private fun getStatusText(code: Int): String =
         when (code) {

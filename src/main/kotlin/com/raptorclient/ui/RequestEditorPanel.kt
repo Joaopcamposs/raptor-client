@@ -23,7 +23,7 @@ class RequestEditorPanel(
     private val storageService: RequestStorageService by lazy { project.getService(RequestStorageService::class.java) }
     private val environmentService: EnvironmentService by lazy { project.getService(EnvironmentService::class.java) }
 
-    private val methodComboBox = JComboBox(HttpMethod.values())
+    private val methodComboBox = JComboBox(HttpMethod.entries.toTypedArray())
     private val urlField = JBTextField()
     private val sendButton = JButton("Send")
     private val saveButton = JButton("Save")

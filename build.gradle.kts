@@ -1,12 +1,12 @@
 plugins {
     id("java")
     id("org.jetbrains.kotlin.jvm") version "2.1.20"
-    id("org.jetbrains.intellij.platform") version "2.5.0"
+    id("org.jetbrains.intellij.platform") version "2.13.1"
     id("org.jlleitschuh.gradle.ktlint") version "12.1.2"
 }
 
 group = "com.raptorclient"
-version = "1.0.2"
+version = "1.0.3"
 
 repositories {
     mavenCentral()
@@ -27,7 +27,7 @@ dependencies {
         intellijIdeaCommunity("2024.3")
         pluginVerifier()
         zipSigner()
-        testFramework(org.jetbrains.intellij.platform.gradle.TestFrameworkType.Platform)
+        testFramework(org.jetbrains.intellij.platform.gradle.TestFrameworkType.Starter)
     }
 
     implementation("com.squareup.okhttp3:okhttp:4.12.0")
@@ -37,6 +37,7 @@ dependencies {
 
     testImplementation(platform("org.junit:junit-bom:5.10.0"))
     testImplementation("org.junit.jupiter:junit-jupiter")
+    testImplementation("junit:junit:4.13.2")
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")
 }
 
@@ -50,8 +51,7 @@ intellijPlatform {
 
     pluginVerification {
         ides {
-            ide(org.jetbrains.intellij.platform.gradle.IntelliJPlatformType.IntellijIdeaCommunity, "2024.3")
-            ide(org.jetbrains.intellij.platform.gradle.IntelliJPlatformType.IntellijIdeaCommunity, "2026.1")
+            recommended()
         }
     }
 
@@ -71,6 +71,7 @@ intellijPlatform {
 tasks {
     test {
         useJUnitPlatform()
+        jvmArgs("-XX:+UnlockDiagnosticVMOptions", "-XX:-UseSharedSpaces")
     }
 }
 
